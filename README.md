@@ -1,10 +1,6 @@
 <!-- ===================== OPX-Aminul · Profile README ===================== -->
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=800&size=32&duration=2400&pause=500&color=00E5FF&center=true&vCenter=true&width=600&height=70&lines=Hi,+I'm+OPX-Aminul+👋;Self-taught+Security+Researcher;AI+Engineer+%26+Builder;Let's+break+things+together" alt="Typing SVG" />
-</p>
-
-<p align="center">
   <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/banner.svg" width="100%" alt="Animated banner"/>
 </p>
 
@@ -53,18 +49,20 @@
 ## 📊 Live GitHub Stats
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=OPX-Aminul&show_icons=true&theme=tokyonight&hide_border=true&rank_icon=github&count_private=true" width="100%" alt="Stats"/><br/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=OPX-Aminul&theme=tokyonight&hide_border=true&ring=00e5ff&fire=ff5470&currStreakLabel=7c4dff" width="100%" alt="Streak"/><br/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=OPX-Aminul&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" width="100%" alt="Top Languages"/><br/>
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=OPX-Aminul&theme=tokyo-night&hide_border=true&area=true&color=00e5ff&line=7c4dff&point=ff5470" width="100%" alt="Activity Graph"/>
+  <img src="https://github-stats-delta-seven.vercel.app/api?username=OPX-Aminul&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" width="100%" alt="Stats"/><br/>
+  <img src="https://github-readme-streak-stats-one.vercel.app/?user=OPX-Aminul&theme=tokyonight&hide_border=true&ring=00e5ff&fire=ff5470&currStreakLabel=7c4dff" width="100%" alt="Streak"/><br/>
+  <img src="https://github-stats-delta-seven.vercel.app/api/top-langs?username=OPX-Aminul&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" width="100%" alt="Top Languages"/><br/>
+  <img src="https://github-readme-activity-graph-jade.vercel.app/graph?username=OPX-Aminul&theme=tokyo-night&hide_border=true&area=true&color=00e5ff&line=7c4dff&point=ff5470" width="100%" alt="Activity Graph"/>
 </p>
 
 ---
 
-## 🏆 Trophies
+## 🏆 Achievements
 
 <p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=OPX-Aminul&theme=tokyonight&no-frame=true&row=1&column=7&margin-w=8" width="100%" alt="Trophies"/>
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=OPX-Aminul&theme=tokyonight" width="100%" alt="Profile summary"/><br/>
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=OPX-Aminul&theme=tokyonight" width="49%" alt="Commit languages"/>
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=OPX-Aminul&theme=tokyonight" width="49%" alt="Repos per language"/>
 </p>
 
 ---
@@ -75,7 +73,7 @@ The one I'm most proud of — an AI-powered security tool where the model improv
 
 <p align="center">
   <a href="https://github.com/OPX-Aminul/OPXoneshot">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=OPX-Aminul&repo=OPXoneshot&theme=tokyonight&hide_border=true" width="90%" alt="OPXoneshot"/>
+    <img src="https://github-stats-delta-seven.vercel.app/api/pin?username=OPX-Aminul&repo=OPXoneshot&theme=tokyonight&hide_border=true" width="90%" alt="OPXoneshot"/>
   </a>
 </p>
 
