@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="30" viewBox="0 0 1000 30">
+  <defs>
+    <linearGradient id="dg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="33%" stop-color="#7c4dff"/>
+      <stop offset="66%" stop-color="#ff5470"/>
+      <stop offset="100%" stop-color="#00ffa3"/>
+    </linearGradient>
+  </defs>
+  <line x1="0" y1="15" x2="1000" y2="15" stroke="#1d2743" stroke-width="2"/>
+  <line x1="0" y1="15" x2="1000" y2="15" stroke="url(#dg)" stroke-width="2" stroke-dasharray="24 10">
+    <animate attributeName="stroke-dashoffset" values="0;-68" dur="1.6s" repeatCount="indefinite"/>
+  </line>
+  <circle r="6" fill="#00e5ff">
+    <animate attributeName="cx" values="0;1000;0" dur="7s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="15;15;15" dur="7s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" dur="7s" repeatCount="indefinite"/>
+  </circle>
+</svg>

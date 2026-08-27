@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" font-family="Fira Code, monospace">
+  <defs>
+    <linearGradient id="bar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1a2036"/>
+      <stop offset="100%" stop-color="#12172a"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- window -->
+  <rect x="20" y="20" width="860" height="380" rx="14" fill="#0b1020" stroke="#223055" stroke-width="2"/>
+  <rect x="20" y="20" width="860" height="44" rx="14" fill="url(#bar)"/>
+  <rect x="20" y="50" width="860" height="14" fill="url(#bar)"/>
+  <circle cx="48" cy="42" r="8" fill="#ff5f56">
+    <animate attributeName="opacity" values="1;0.5;1" dur="2.4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="76" cy="42" r="8" fill="#ffbd2e">
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" begin="0.4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="104" cy="42" r="8" fill="#27c93f">
+    <animate attributeName="opacity" values="1;0.5;1" dur="2.4s" begin="0.8s" repeatCount="indefinite"/>
+  </circle>
+  <text x="450" y="49" text-anchor="middle" font-size="15" fill="#5a6b8c">opx@aminul ~ % whoami</text>
+
+  <!-- line 1: prompt + whoami -->
+  <text x="48" y="105" font-size="19" fill="#8a96b3" opacity="0">
+    <tspan fill="#00ffa3">~$</tspan> <tspan fill="#e6e9f2">whoami</tspan>
+    <animate attributeName="opacity" values="0;1" dur="0.3s" begin="0.4s" fill="freeze"/>
+  </text>
+
+  <!-- line 2 -->
+  <text x="48" y="145" font-size="19" fill="#e6e9f2" opacity="0">> OPX-Aminul — Security Researcher &amp; AI Engineer <tspan fill="#00e5ff">🔐🤖</tspan>
+    <animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.0s" fill="freeze"/>
+  </text>
+
+  <!-- line 3 prompt -->
+  <text x="48" y="195" font-size="19" fill="#8a96b3" opacity="0">
+    <tspan fill="#00ffa3">~$</tspan> <tspan fill="#e6e9f2">cat about.txt</tspan>
+    <animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.8s" fill="freeze"/>
+  </text>
+
+  <!-- typed facts -->
+  <text x="48" y="233" font-size="18" fill="#aeb8d4" opacity="0">I break things to learn how they work, then build tools that protect.
+    <animate attributeName="opacity" values="0;1" dur="0.8s" begin="2.4s" fill="freeze"/>
+  </text>
+  <text x="48" y="267" font-size="18" fill="#aeb8d4" opacity="0">Self-taught. Driven by curiosity, powered by open source.
+    <animate attributeName="opacity" values="0;1" dur="0.8s" begin="3.4s" fill="freeze"/>
+  </text>
+
+  <!-- line: stats prompt -->
+  <text x="48" y="313" font-size="19" fill="#8a96b3" opacity="0">
+    <tspan fill="#00ffa3">~$</tspan> <tspan fill="#e6e9f2">./mission --status</tspan>
+    <animate attributeName="opacity" values="0;1" dur="0.3s" begin="4.4s" fill="freeze"/>
+  </text>
+
+  <!-- progress bar: community learning project -->
+  <text x="48" y="349" font-size="17" fill="#7c4dff" opacity="0">
+    [AI community-learning sync] ███████████████████░ <tspan fill="#00ffa3">100%</tspan>
+    <animate attributeName="opacity" values="0;1" dur="0.4s" begin="5.0s" fill="freeze"/>
+  </text>
+  <rect x="44" y="332" width="640" height="24" rx="6" fill="none" stroke="#223055" opacity="0">
+    <animate attributeName="opacity" values="0;1" dur="0.2s" begin="5.0s" fill="freeze"/>
+  </rect>
+  <rect x="44" y="332" width="0" height="24" rx="6" fill="#00e5ff" opacity="0.85">
+    <animate attributeName="width" values="0;640" dur="1.6s" begin="5.1s" fill="freeze"/>
+    <animate attributeName="opacity" values="0.85;0.5;0.85" dur="1.6s" begin="6.7s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- blinking cursor at end -->
+  <rect x="48" y="375" width="11" height="20" fill="#00ffa3" opacity="0" filter="url(#softGlow)">
+    <animate attributeName="opacity" values="0;1" dur="0.1s" begin="6.9s" fill="freeze"/>
+    <animate attributeName="opacity" values="1;0;1" dur="0.9s" begin="7.0s" repeatCount="indefinite"/>
+  </rect>
+</svg>
