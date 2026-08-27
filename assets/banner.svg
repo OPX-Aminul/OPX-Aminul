@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05070f"/>
+      <stop offset="50%" stop-color="#0a0f1e"/>
+      <stop offset="100%" stop-color="#05070f"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="50%" stop-color="#7c4dff"/>
+      <stop offset="100%" stop-color="#00ffa3"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="30%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="70%" cy="60%" r="60%">
+      <stop offset="0%" stop-color="#7c4dff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#7c4dff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow3" cx="50%" cy="80%" r="50%">
+      <stop offset="0%" stop-color="#00ffa3" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#00ffa3" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="300" fill="url(#bgGrad)"/>
+
+  <!-- Animated glows -->
+  <ellipse cx="360" cy="120" rx="420" ry="200" fill="url(#glow1)">
+    <animate attributeName="rx" values="420;480;420" dur="6s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="840" cy="150" rx="420" ry="220" fill="url(#glow2)">
+    <animate attributeName="rx" values="420;500;420" dur="8s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="600" cy="260" rx="500" ry="120" fill="url(#glow3)">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="5s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Animated particles -->
+  <g fill="#00e5ff">
+    <circle cx="100" cy="60" r="3"><animate attributeName="cy" values="60;290;60" dur="7s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.2;1" dur="7s" repeatCount="indefinite"/></circle>
+    <circle cx="220" cy="250" r="2.5"><animate attributeName="cy" values="250;50;250" dur="9s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.3;1" dur="9s" repeatCount="indefinite"/></circle>
+    <circle cx="350" cy="80" r="2"><animate attributeName="cy" values="80;280;80" dur="8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0.2;0.8" dur="8s" repeatCount="indefinite"/></circle>
+    <circle cx="500" cy="260" r="3"><animate attributeName="cy" values="260;40;260" dur="10s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.2;1" dur="10s" repeatCount="indefinite"/></circle>
+    <circle cx="650" cy="70" r="2.5"><animate attributeName="cy" values="70;290;70" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0.2;0.9" dur="6s" repeatCount="indefinite"/></circle>
+    <circle cx="780" cy="240" r="2"><animate attributeName="cy" values="240;50;240" dur="8.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.2;1" dur="8.5s" repeatCount="indefinite"/></circle>
+    <circle cx="920" cy="90" r="3"><animate attributeName="cy" values="90;280;90" dur="7.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;0.2;0.7" dur="7.5s" repeatCount="indefinite"/></circle>
+    <circle cx="1050" cy="260" r="2.5"><animate attributeName="cy" values="260;60;260" dur="9.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.2;1" dur="9.5s" repeatCount="indefinite"/></circle>
+    <circle cx="1120" cy="120" r="2"><animate attributeName="cy" values="120;290;120" dur="8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0.2;0.8" dur="8s" repeatCount="indefinite"/></circle>
+    <circle cx="150" cy="160" r="2"><animate attributeName="cy" values="160;50;160" dur="6.5s" repeatCount="indefinite"/></circle>
+    <circle cx="430" cy="200" r="1.8"><animate attributeName="cy" values="200;40;200" dur="7s" repeatCount="indefinite"/></circle>
+    <circle cx="980" cy="160" r="1.8"><animate attributeName="cy" values="160;280;160" dur="6.8s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <!-- Title with animated gradient -->
+  <text x="600" y="130" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="68" font-weight="800" fill="url(#titleGrad)" letter-spacing="2">
+    OPX-Aminul
+    <animate attributeName="opacity" values="0;1" dur="1.5s" fill="freeze"/>
+  </text>
+
+  <!-- Animated underline -->
+  <rect x="430" y="150" width="340" height="4" rx="2" fill="url(#titleGrad)">
+    <animate attributeName="width" values="0;340;340" dur="1.5s" fill="freeze"/>
+  </rect>
+
+  <!-- Subtitle typing dots -->
+  <text x="600" y="195" text-anchor="middle" font-family="Fira Code, monospace" font-size="26" fill="#8a96b3">
+    AI ENGINEER
+    <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"/>
+  </text>
+  <text x="600" y="225" text-anchor="middle" font-family="Fira Code, monospace" font-size="20" fill="#5a6b8c">
+    WPS SECURITY RESEARCHER · OPEN-SOURCE BUILDER
+    <animate attributeName="opacity" values="0;1" dur="2s" begin="1s" fill="freeze"/>
+  </text>
+
+  <!-- Animated orbiting rings -->
+  <g transform="translate(600,120)">
+    <circle cx="0" cy="0" r="150" fill="none" stroke="#00e5ff" stroke-width="1" stroke-dasharray="10 8" opacity="0.4">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="20s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="185" fill="none" stroke="#7c4dff" stroke-width="1" stroke-dasharray="6 10" opacity="0.3">
+      <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="28s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Sparkle stars -->
+  <g fill="#00ffa3">
+    <text x="90" y="150" font-size="18">✦</text>
+    <text x="1090" y="90" font-size="14">✦</text>
+    <text x="980" y="40" font-size="12">✦</text>
+    <text x="200" y="50" font-size="12">✦</text>
+  </g>
+</svg>

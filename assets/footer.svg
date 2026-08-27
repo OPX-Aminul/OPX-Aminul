@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="120" viewBox="0 0 720 120">
+  <defs>
+    <linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="50%" stop-color="#7c4dff"/>
+      <stop offset="100%" stop-color="#00ffa3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Pulsing divider -->
+  <rect x="160" y="50" width="400" height="3" rx="1.5" fill="url(#fg)">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Left star -->
+  <text x="140" y="58" font-size="22" fill="#00e5ff" text-anchor="middle">
+    ✦
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Right star -->
+  <text x="580" y="58" font-size="22" fill="#00ffa3" text-anchor="middle">
+    ✦
+    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Bouncing dots -->
+  <circle cx="335" cy="85" r="5" fill="#00e5ff">
+    <animate attributeName="cy" values="85;75;85" dur="1.2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="360" cy="85" r="5" fill="#7c4dff">
+    <animate attributeName="cy" values="85;75;85" dur="1.2s" begin="0.2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="385" cy="85" r="5" fill="#00ffa3">
+    <animate attributeName="cy" values="85;75;85" dur="1.2s" begin="0.4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Text -->
+  <text x="360" y="30" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#8a96b3">
+    Built with 🧠 Community Learning
+  </text>
+</svg>
