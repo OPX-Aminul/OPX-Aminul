@@ -49,9 +49,9 @@
 ## 📊 Live GitHub Stats
 
 <p align="center">
-  <img src="https://github-stats-delta-seven.vercel.app/api?username=OPX-Aminul&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" width="100%" alt="Stats"/><br/>
+  <img src="https://github-readme-stats-salesp07.vercel.app/api?username=OPX-Aminul&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" width="100%" alt="Stats"/><br/>
   <img src="https://github-readme-streak-stats-one.vercel.app/?user=OPX-Aminul&theme=tokyonight&hide_border=true&ring=00e5ff&fire=ff5470&currStreakLabel=7c4dff" width="100%" alt="Streak"/><br/>
-  <img src="https://github-stats-delta-seven.vercel.app/api/top-langs?username=OPX-Aminul&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" width="100%" alt="Top Languages"/><br/>
+  <img src="https://github-readme-stats-salesp07.vercel.app/api/top-langs?username=OPX-Aminul&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" width="100%" alt="Top Languages"/><br/>
   <img src="https://github-readme-activity-graph-jade.vercel.app/graph?username=OPX-Aminul&theme=tokyo-night&hide_border=true&area=true&color=00e5ff&line=7c4dff&point=ff5470" width="100%" alt="Activity Graph"/>
 </p>
 
@@ -73,7 +73,7 @@ The one I'm most proud of — an AI-powered security tool where the model improv
 
 <p align="center">
   <a href="https://github.com/OPX-Aminul/OPXoneshot">
-    <img src="https://github-stats-delta-seven.vercel.app/api/pin?username=OPX-Aminul&repo=OPXoneshot&theme=tokyonight&hide_border=true" width="90%" alt="OPXoneshot"/>
+    <img src="https://github-readme-stats-salesp07.vercel.app/api/pin?username=OPX-Aminul&repo=OPXoneshot&theme=tokyonight&hide_border=true" width="90%" alt="OPXoneshot"/>
   </a>
 </p>
 
