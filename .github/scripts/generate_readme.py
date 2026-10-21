@@ -9,8 +9,16 @@ from pathlib import Path
 from xml.sax.saxutils import escape
 
 USERNAME = "OPX-Aminul"
+WEBSITE = "https://opaminulff.vercel.app/"
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / "assets"
+
+FEATURED = [
+    "OPX-Demon",
+    "OPXoneshot",
+    "OPX-wifi4",
+    "nethunter-all-kernel",
+]
 
 
 def github_api(path, authed=True):
@@ -88,22 +96,24 @@ def badge_svg(label, value, color):
 user = github_api(f"/users/{USERNAME}", authed=False)
 followers = int(user.get("followers") or 0)
 following = int(user.get("following") or 0)
-bio = md_escape(user.get("bio") or "OPX developer")
 
 repos = paginate(f"/users/{USERNAME}/repos?type=owner&sort=updated")
 public = [r for r in repos if not r.get("private") and r.get("name") != USERNAME]
 own = [r for r in public if not r.get("fork")]
 stars = sum(int(r.get("stargazers_count") or 0) for r in public)
+by_name = {r["name"]: r for r in own}
 
-popular = sorted(
-    own,
-    key=lambda r: (
-        int(r.get("stargazers_count") or 0),
-        r.get("updated_at") or "",
-        int(r.get("forks_count") or 0),
-    ),
-    reverse=True,
-)[:3]
+featured = [by_name[n] for n in FEATURED if n in by_name]
+if len(featured) < 4:
+    extra = sorted(
+        [r for r in own if r["name"] not in FEATURED],
+        key=lambda r: (
+            int(r.get("stargazers_count") or 0),
+            r.get("updated_at") or "",
+        ),
+        reverse=True,
+    )
+    featured.extend(extra[: max(0, 4 - len(featured))])
 
 ASSETS.mkdir(parents=True, exist_ok=True)
 (ASSETS / "followers.svg").write_text(badge_svg("FOLLOWERS", followers, "#7c4dff"), encoding="utf-8")
@@ -145,25 +155,24 @@ repos_lang = (
     f"?username={USERNAME}&theme=tokyonight"
 )
 
-popular_pins = []
-for r in popular:
+featured_pins = []
+for r in featured:
     pin = (
         f"https://github-readme-stats.vercel.app/api/pin/?username={USERNAME}"
         f"&repo={r['name']}&theme=tokyonight&hide_border=true"
     )
-    popular_pins.append(
+    featured_pins.append(
         f'  <a href="{r["html_url"]}"><img src="{pin}" height="140" alt="{r["name"]}"/></a>'
     )
 
-if popular_pins:
-    popular_block = """## Popular
+featured_block = ""
+if featured_pins:
+    featured_block = """## Featured work
 
 <p align="center">
-""" + "\n".join(popular_pins) + """
+""" + "\n".join(featured_pins) + """
 </p>
 """
-else:
-    popular_block = ""
 
 readme = f"""<!-- Generated live from GitHub API. Do not edit by hand. -->
 
@@ -175,6 +184,7 @@ readme = f"""<!-- Generated live from GitHub API. Do not edit by hand. -->
   <a href="https://github.com/{USERNAME}"><img src="{views}" alt="Profile views"/></a>
   <a href="https://github.com/{USERNAME}?tab=followers"><img src="{asset}/followers.svg?v={cache}" alt="Followers"/></a>
   <a href="https://github.com/{USERNAME}?tab=repositories"><img src="{asset}/stars.svg?v={cache}" alt="Stars"/></a>
+  <a href="{WEBSITE}"><img src="https://img.shields.io/badge/Website-opaminulff-00e5ff?style=for-the-badge" alt="Website"/></a>
 </p>
 
 <p align="center">
@@ -183,7 +193,7 @@ readme = f"""<!-- Generated live from GitHub API. Do not edit by hand. -->
 
 ---
 
-## About Me
+## About
 
 <p align="center">
   <img src="{asset}/terminal.svg?v={cache}" width="100%" alt="whoami terminal"/>
@@ -193,26 +203,27 @@ readme = f"""<!-- Generated live from GitHub API. Do not edit by hand. -->
   <img src="{asset}/ticker.svg?v={cache}" width="100%" alt="skills ticker"/>
 </p>
 
-- **{bio}**
-- **Security Researcher** — WiFi/WPS internals, then defense
-- **AI Engineer** — models that learn from real attempts
-- **Android Developer** — tools that run in your pocket
-- **Self-taught** — curiosity and a terminal
+I build mobile and wireless security tools — from Android pentest suites to WPS research frameworks.
+
+- **Android security** — chroot/QEMU engines, USB Wi-Fi, HID, and on-device tooling
+- **Wireless research** — WPS internals, Pixie Dust, monitor-mode labs
+- **Open source** — ship usable tools, not just writeups
+- **Location** — Bangladesh · currently building [OPX-Demon](https://github.com/{USERNAME}/OPX-Demon)
 
 Live snapshot: **{followers}** followers · **{following}** following · **{stars}** stars · synced `{synced}`
 
 ---
 
-## Tech I Love
+## Stack
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=python,java,javascript,typescript,react,nodejs,flask,git,github,docker,linux,bash&perline=12" alt="Core skills"/><br/><br/>
-  <img src="https://skillicons.dev/icons?i=postgres,mysql,sqlite,redis,tensorflow,pytorch,kali,androidstudio,vscode,raspberrypi,supabase,githubactions&perline=12" alt="Tools and platforms"/>
+  <img src="https://skillicons.dev/icons?i=python,java,kotlin,javascript,typescript,linux,bash,git,github,docker,androidstudio,vscode&perline=12" alt="Core skills"/><br/><br/>
+  <img src="https://skillicons.dev/icons?i=react,nodejs,flask,postgres,mysql,sqlite,redis,kali,raspberrypi,supabase,githubactions,nginx&perline=12" alt="Tools and platforms"/>
 </p>
 
 ---
 
-## Live GitHub Stats
+## GitHub
 
 <p align="center">
   <img src="{stats}" width="100%" alt="GitHub stats"/><br/>
@@ -223,7 +234,7 @@ Live snapshot: **{followers}** followers · **{following}** following · **{star
 
 ---
 
-## Achievements
+## Activity
 
 <p align="center">
   <img src="{summary}" width="100%" alt="Profile summary"/><br/>
@@ -233,16 +244,16 @@ Live snapshot: **{followers}** followers · **{following}** following · **{star
 
 ---
 
-{popular_block}
+{featured_block}
 
 ---
 
-## Find Me
+## Links
 
 <p align="center">
   <a href="https://github.com/{USERNAME}"><img src="https://img.shields.io/badge/OPX--Aminul-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
+  <a href="{WEBSITE}"><img src="https://img.shields.io/badge/Website-opaminulff-00e5ff?style=for-the-badge" alt="Website"/></a>
   <a href="https://github.com/{USERNAME}?tab=repositories"><img src="https://img.shields.io/badge/All-Repositories-7c4dff?style=for-the-badge&logo=git&logoColor=white" alt="Repos"/></a>
-  <a href="https://github.com/{USERNAME}?tab=followers"><img src="{asset}/followers.svg?v={cache}" alt="Followers"/></a>
 </p>
 
 <p align="center">
@@ -252,5 +263,5 @@ Live snapshot: **{followers}** followers · **{following}** following · **{star
 
 (ROOT / "README.md").write_text(readme, encoding="utf-8")
 print(
-    f"Wrote README.md followers={followers} stars={stars} popular={[r['name'] for r in popular]}"
+    f"Wrote README.md followers={followers} stars={stars} featured={[r['name'] for r in featured]}"
 )

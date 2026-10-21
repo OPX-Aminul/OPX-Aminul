@@ -29,7 +29,7 @@
     <animate attributeName="opacity" values="0.5;1;0.5" dur="3.5s" repeatCount="indefinite"/>
   </text>
   <text x="450" y="112" text-anchor="middle" font-size="14" fill="#5a6b8c">
-    OPX-Aminul · Always learning, always building
+    OPX-Aminul · Android &amp; wireless security tools
   </text>
   <text x="450" y="132" text-anchor="middle" font-size="12" fill="#3d4a68">
     ⚡ Built with curiosity
