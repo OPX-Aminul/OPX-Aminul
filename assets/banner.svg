@@ -113,35 +113,19 @@
   <!-- greeting -->
   <text x="600" y="130" text-anchor="middle" font-family="Fira Code, monospace" font-size="20" fill="#8a96b3" letter-spacing="6">
     HELLO WORLD, I AM
-    <animate attributeName="opacity" values="0;1" dur="1.2s" fill="freeze"/>
   </text>
 
   <!-- name with gradient sweep + glow pulse -->
   <text x="600" y="205" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="86" font-weight="900" fill="url(#titleGrad)" letter-spacing="4" filter="url(#glow)">
     OPX-Aminul
-    <animate attributeName="opacity" values="0;1" dur="1.6s" fill="freeze"/>
   </text>
 
   <!-- animated underline draw -->
-  <rect x="600" y="228" width="0" height="5" rx="2.5" fill="url(#titleGrad)">
-    <animate attributeName="x" values="600;330" dur="1.4s" begin="0.6s" fill="freeze"/>
-    <animate attributeName="width" values="0;540" dur="1.4s" begin="0.6s" fill="freeze"/>
-  </rect>
+  <rect x="330" y="228" width="540" height="5" rx="2.5" fill="url(#titleGrad)"/>
 
-  <!-- cycling roles -->
+  <!-- roles always visible even if SMIL is disabled -->
   <g font-family="Fira Code, monospace" font-size="26" text-anchor="middle">
-    <text x="600" y="272" fill="#00e5ff" opacity="0">Security Researcher
-      <animate attributeName="opacity" values="0;1;1;0;0;0;0;0;0" keyTimes="0;0.03;0.2;0.25;0.33;0.5;0.66;0.9;1" dur="12s" repeatCount="indefinite"/>
-    </text>
-    <text x="600" y="272" fill="#7c4dff" opacity="0">AI Engineer
-      <animate attributeName="opacity" values="0;0;0;0;1;1;0;0;0" keyTimes="0;0.25;0.28;0.3;0.33;0.45;0.5;0.75;1" dur="12s" repeatCount="indefinite"/>
-    </text>
-    <text x="600" y="272" fill="#ff5470" opacity="0">Android Pentester
-      <animate attributeName="opacity" values="0;0;0;0;0;1;1;0;0" keyTimes="0;0.5;0.53;0.55;0.58;0.6;0.7;0.75;1" dur="12s" repeatCount="indefinite"/>
-    </text>
-    <text x="600" y="272" fill="#00ffa3" opacity="0">Open-Source Builder
-      <animate attributeName="opacity" values="0;0;0;0;0;0;0;1;1" keyTimes="0;0.72;0.75;0.78;0.8;0.85;0.9;0.93;1" dur="12s" repeatCount="indefinite"/>
-    </text>
+    <text x="600" y="272" fill="#00e5ff">Security Researcher  ·  AI Engineer  ·  Android Pentester</text>
     <!-- blinking terminal cursor -->
     <rect x="790" y="252" width="12" height="26" fill="#8a96b3">
       <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
