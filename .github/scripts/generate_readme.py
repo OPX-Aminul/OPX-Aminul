@@ -2,24 +2,26 @@
 import json
 import os
 import subprocess
+import time
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import quote
+from xml.sax.saxutils import escape
 
 USERNAME = "OPX-Aminul"
 ROOT = Path(__file__).resolve().parents[2]
+ASSETS = ROOT / "assets"
 
 
-def github_api(path):
-    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+def github_api(path, authed=True):
     url = f"https://api.github.com{path}"
     headers = {
         "Accept": "application/vnd.github+json",
         "User-Agent": "opx-aminul-profile-readme",
         "X-GitHub-Api-Version": "2022-11-28",
     }
-    if token:
+    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    if authed and token:
         headers["Authorization"] = f"Bearer {token}"
         req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=30) as resp:
@@ -27,11 +29,18 @@ def github_api(path):
 
     result = subprocess.run(
         ["gh", "api", path],
-        check=True,
         capture_output=True,
         text=True,
     )
-    return json.loads(result.stdout)
+    if result.returncode == 0 and result.stdout.strip():
+        return json.loads(result.stdout)
+
+    req = urllib.request.Request(url, headers={
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "opx-aminul-profile-readme",
+    })
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return json.load(resp)
 
 
 def paginate(path):
@@ -53,44 +62,60 @@ def md_escape(text):
     return (text or "").replace("|", "\\|").replace("\n", " ").strip()
 
 
-def shield_label(text):
-    return quote(str(text).replace("-", "--").replace("_", "__"), safe="")
+def badge_svg(label, value, color):
+    label = str(label).upper()
+    value = str(value)
+    char_w = 7.5
+    left = max(86, 28 + char_w * len(label))
+    right = max(32, 20 + char_w * len(value))
+    width = left + right
+    lx = left / 2
+    rx = left + right / 2
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width:.1f}" height="28" role="img" aria-label="{escape(label)}: {escape(value)}">
+  <title>{escape(label)}: {escape(value)}</title>
+  <g shape-rendering="crispEdges">
+    <rect width="{left:.1f}" height="28" fill="#555"/>
+    <rect x="{left:.1f}" width="{right:.1f}" height="28" fill="{color}"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11">
+    <text x="{lx:.1f}" y="18">{escape(label)}</text>
+    <text x="{rx:.1f}" y="18" font-weight="bold">{escape(value)}</text>
+  </g>
+</svg>
+'''
 
 
-user = github_api(f"/users/{USERNAME}")
+user = github_api(f"/users/{USERNAME}", authed=False)
 followers = int(user.get("followers") or 0)
 following = int(user.get("following") or 0)
-public_repos = int(user.get("public_repos") or 0)
 bio = md_escape(user.get("bio") or "OPX developer")
 
 repos = paginate(f"/users/{USERNAME}/repos?type=owner&sort=updated")
-public = [r for r in repos if not r.get("private")]
-own = [r for r in public if r.get("name") != USERNAME and not r.get("fork")]
-forks = [r for r in public if r.get("name") != USERNAME and r.get("fork")]
+public = [r for r in repos if not r.get("private") and r.get("name") != USERNAME]
+own = [r for r in public if not r.get("fork")]
 stars = sum(int(r.get("stargazers_count") or 0) for r in public)
-fork_count = sum(int(r.get("forks_count") or 0) for r in public)
 
-flagship = next((r for r in own if r.get("name") == "OPXoneshot"), own[0] if own else None)
-more = [r for r in own if flagship is None or r["name"] != flagship["name"]]
+popular = sorted(
+    own,
+    key=lambda r: (
+        int(r.get("stargazers_count") or 0),
+        r.get("updated_at") or "",
+        int(r.get("forks_count") or 0),
+    ),
+    reverse=True,
+)[:3]
+
+ASSETS.mkdir(parents=True, exist_ok=True)
+(ASSETS / "followers.svg").write_text(badge_svg("FOLLOWERS", followers, "#7c4dff"), encoding="utf-8")
+(ASSETS / "stars.svg").write_text(badge_svg("STARS", stars, "#00ffa3"), encoding="utf-8")
 
 synced = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+cache = int(time.time())
+asset = f"https://raw.githubusercontent.com/{USERNAME}/{USERNAME}/main/assets"
 views = (
     f"https://komarev.com/ghpvc/?username={USERNAME}"
     "&style=for-the-badge&color=00e5ff&label=PROFILE+VIEWS"
 )
-followers_badge = (
-    f"https://img.shields.io/badge/FOLLOWERS-{followers}-7c4dff"
-    "?style=for-the-badge&logo=github&logoColor=white"
-)
-stars_badge = (
-    f"https://img.shields.io/badge/STARS-{stars}-00ffa3"
-    "?style=for-the-badge&logo=github&logoColor=white"
-)
-repos_badge = (
-    f"https://img.shields.io/badge/PUBLIC%20REPOS-{public_repos}-7c4dff"
-    "?style=for-the-badge&logo=github&logoColor=white"
-)
-
 stats = (
     f"https://github-readme-stats.vercel.app/api?username={USERNAME}"
     "&show_icons=true&theme=tokyonight&hide_border=true&count_private=true"
@@ -120,90 +145,40 @@ repos_lang = (
     f"?username={USERNAME}&theme=tokyonight"
 )
 
-asset = f"https://raw.githubusercontent.com/{USERNAME}/{USERNAME}/main/assets"
-
-own_rows = []
-for r in own:
-    lang = r.get("primaryLanguage")
-    if isinstance(lang, dict):
-        lang_name = lang.get("name") or "-"
-    else:
-        lang_name = r.get("language") or "-"
-    desc = md_escape(r.get("description")) or "No description"
-    own_rows.append(
-        f"| [{r['name']}]({r['html_url']}) | {desc} | {lang_name} | {int(r.get('stargazers_count') or 0)} |"
-    )
-
-fork_rows = []
-for r in forks:
-    lang_name = r.get("language") or "-"
-    desc = md_escape(r.get("description")) or "No description"
-    fork_rows.append(
-        f"| [{r['name']}]({r['html_url']}) | {desc} | {lang_name} |"
-    )
-
-more_badges = []
-for r in more:
-    desc = (r.get("description") or r["name"]).split(".")[0][:42]
-    more_badges.append(
-        f'  <a href="{r["html_url"]}">'
-        f'<img src="https://img.shields.io/badge/{shield_label(r["name"])}-{shield_label(desc)}-7c4dff'
-        f'?style=for-the-badge&logo=github&logoColor=white" alt="{r["name"]}"/></a>'
-    )
-
-flagship_block = ""
-if flagship:
+popular_pins = []
+for r in popular:
     pin = (
         f"https://github-readme-stats.vercel.app/api/pin/?username={USERNAME}"
-        f"&repo={flagship['name']}&theme=tokyonight&hide_border=true"
+        f"&repo={r['name']}&theme=tokyonight&hide_border=true"
     )
-    flagship_block = f"""## Flagship Project
+    popular_pins.append(
+        f'  <a href="{r["html_url"]}"><img src="{pin}" height="140" alt="{r["name"]}"/></a>'
+    )
 
-Live pin for **[{flagship['name']}]({flagship['html_url']})** — only rendered because this public repo exists right now.
-
-<p align="center">
-  <a href="{flagship['html_url']}">
-    <img src="{pin}" width="90%" alt="{flagship['name']}"/>
-  </a>
-</p>
-"""
-    if more_badges:
-        flagship_block += """
-### More from me
+if popular_pins:
+    popular_block = """## Popular
 
 <p align="center">
-""" + "\n".join(more_badges) + """
+""" + "\n".join(popular_pins) + """
 </p>
 """
-
-own_table = "\n".join(own_rows) if own_rows else "| _No public original repositories right now_ | | | |"
-fork_section = ""
-if fork_rows:
-    fork_section = f"""
-## Public forks
-
-These appear only while the fork still exists and is public.
-
-| Repository | Description | Language |
-| --- | --- | --- |
-{chr(10).join(fork_rows)}
-"""
+else:
+    popular_block = ""
 
 readme = f"""<!-- Generated live from GitHub API. Do not edit by hand. -->
 
 <p align="center">
-  <img src="{asset}/banner.svg" width="100%" alt="OPX-Aminul banner"/>
+  <img src="{asset}/banner.svg?v={cache}" width="100%" alt="OPX-Aminul banner"/>
 </p>
 
 <p align="center">
   <a href="https://github.com/{USERNAME}"><img src="{views}" alt="Profile views"/></a>
-  <a href="https://github.com/{USERNAME}?tab=followers"><img src="{followers_badge}" alt="Followers"/></a>
-  <a href="https://github.com/{USERNAME}?tab=repositories"><img src="{stars_badge}" alt="Stars"/></a>
-  <a href="https://github.com/{USERNAME}?tab=repositories"><img src="{repos_badge}" alt="Public repos"/></a>
+  <a href="https://github.com/{USERNAME}?tab=followers"><img src="{asset}/followers.svg?v={cache}" alt="Followers"/></a>
+  <a href="https://github.com/{USERNAME}?tab=repositories"><img src="{asset}/stars.svg?v={cache}" alt="Stars"/></a>
 </p>
 
 <p align="center">
-  <img src="{asset}/divider.svg" width="100%" alt="divider"/>
+  <img src="{asset}/divider.svg?v={cache}" width="100%" alt="divider"/>
 </p>
 
 ---
@@ -211,11 +186,11 @@ readme = f"""<!-- Generated live from GitHub API. Do not edit by hand. -->
 ## About Me
 
 <p align="center">
-  <img src="{asset}/terminal.svg" width="100%" alt="whoami terminal"/>
+  <img src="{asset}/terminal.svg?v={cache}" width="100%" alt="whoami terminal"/>
 </p>
 
 <p align="center">
-  <img src="{asset}/ticker.svg" width="100%" alt="skills ticker"/>
+  <img src="{asset}/ticker.svg?v={cache}" width="100%" alt="skills ticker"/>
 </p>
 
 - **{bio}**
@@ -224,7 +199,7 @@ readme = f"""<!-- Generated live from GitHub API. Do not edit by hand. -->
 - **Android Developer** — tools that run in your pocket
 - **Self-taught** — curiosity and a terminal
 
-Live snapshot: **{followers}** followers, **{following}** following, **{public_repos}** public repos, **{stars}** stars, **{fork_count}** forks. Synced `{synced}`.
+Live snapshot: **{followers}** followers · **{following}** following · **{stars}** stars · synced `{synced}`
 
 ---
 
@@ -258,16 +233,7 @@ Live snapshot: **{followers}** followers, **{following}** following, **{public_r
 
 ---
 
-{flagship_block}
-
-## Public repositories
-
-This table is built from the GitHub API. Missing or private repos are omitted automatically.
-
-| Repository | Description | Language | Stars |
-| --- | --- | --- | --- |
-{own_table}
-{fork_section}
+{popular_block}
 
 ---
 
@@ -276,13 +242,15 @@ This table is built from the GitHub API. Missing or private repos are omitted au
 <p align="center">
   <a href="https://github.com/{USERNAME}"><img src="https://img.shields.io/badge/OPX--Aminul-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
   <a href="https://github.com/{USERNAME}?tab=repositories"><img src="https://img.shields.io/badge/All-Repositories-7c4dff?style=for-the-badge&logo=git&logoColor=white" alt="Repos"/></a>
-  <a href="https://github.com/{USERNAME}?tab=followers"><img src="https://img.shields.io/badge/Followers-{followers}-00e5ff?style=for-the-badge&logo=github" alt="Followers"/></a>
+  <a href="https://github.com/{USERNAME}?tab=followers"><img src="{asset}/followers.svg?v={cache}" alt="Followers"/></a>
 </p>
 
 <p align="center">
-  <img src="{asset}/footer.svg" width="100%" alt="footer"/>
+  <img src="{asset}/footer.svg?v={cache}" width="100%" alt="footer"/>
 </p>
 """
 
 (ROOT / "README.md").write_text(readme, encoding="utf-8")
-print(f"Wrote README.md followers={followers} public_repos={public_repos} own={len(own)} forks={len(forks)}")
+print(
+    f"Wrote README.md followers={followers} stars={stars} popular={[r['name'] for r in popular]}"
+)
