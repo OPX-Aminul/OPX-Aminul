@@ -1,17 +1,17 @@
 <!-- Generated live from GitHub API. Do not edit by hand. -->
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/banner.svg?v=1792590652" width="100%" alt="OPX-Aminul banner"/>
+  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/banner.svg?v=1792590676" width="100%" alt="OPX-Aminul banner"/>
 </p>
 
 <p align="center">
   <a href="https://github.com/OPX-Aminul"><img src="https://komarev.com/ghpvc/?username=OPX-Aminul&style=for-the-badge&color=00e5ff&label=PROFILE+VIEWS" alt="Profile views"/></a>
-  <a href="https://github.com/OPX-Aminul?tab=followers"><img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/followers.svg?v=1792590652" alt="Followers"/></a>
-  <a href="https://github.com/OPX-Aminul?tab=repositories"><img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/stars.svg?v=1792590652" alt="Stars"/></a>
+  <a href="https://github.com/OPX-Aminul?tab=followers"><img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/followers.svg?v=1792590676" alt="Followers"/></a>
+  <a href="https://github.com/OPX-Aminul?tab=repositories"><img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/stars.svg?v=1792590676" alt="Stars"/></a>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/divider.svg?v=1792590652" width="100%" alt="divider"/>
+  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/divider.svg?v=1792590676" width="100%" alt="divider"/>
 </p>
 
 ---
@@ -19,11 +19,11 @@
 ## About Me
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/terminal.svg?v=1792590652" width="100%" alt="whoami terminal"/>
+  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/terminal.svg?v=1792590676" width="100%" alt="whoami terminal"/>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/ticker.svg?v=1792590652" width="100%" alt="skills ticker"/>
+  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/ticker.svg?v=1792590676" width="100%" alt="skills ticker"/>
 </p>
 
 - **I'm the OPX developer**
@@ -32,7 +32,7 @@
 - **Android Developer** — tools that run in your pocket
 - **Self-taught** — curiosity and a terminal
 
-Live snapshot: **5** followers · **1** following · **5** stars · synced `2026-10-21 13:50 UTC`
+Live snapshot: **0** followers · **0** following · **5** stars · synced `2026-10-21 13:51 UTC`
 
 ---
 
@@ -82,9 +82,9 @@ Live snapshot: **5** followers · **1** following · **5** stars · synced `2026
 <p align="center">
   <a href="https://github.com/OPX-Aminul"><img src="https://img.shields.io/badge/OPX--Aminul-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
   <a href="https://github.com/OPX-Aminul?tab=repositories"><img src="https://img.shields.io/badge/All-Repositories-7c4dff?style=for-the-badge&logo=git&logoColor=white" alt="Repos"/></a>
-  <a href="https://github.com/OPX-Aminul?tab=followers"><img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/followers.svg?v=1792590652" alt="Followers"/></a>
+  <a href="https://github.com/OPX-Aminul?tab=followers"><img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/followers.svg?v=1792590676" alt="Followers"/></a>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/footer.svg?v=1792590652" width="100%" alt="footer"/>
+  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/footer.svg?v=1792590676" width="100%" alt="footer"/>
 </p>
