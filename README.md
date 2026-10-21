@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://github.com/OPX-Aminul"><img src="https://komarev.com/ghpvc/?username=OPX-Aminul&style=for-the-badge&color=00e5ff&label=PROFILE+VIEWS" alt="Profile views"/></a>
-  <a href="https://github.com/OPX-Aminul?tab=followers"><img src="https://img.shields.io/badge/FOLLOWERS-5-7c4dff?style=for-the-badge&logo=github&logoColor=white" alt="Followers"/></a>
+  <a href="https://github.com/OPX-Aminul?tab=followers"><img src="https://img.shields.io/badge/FOLLOWERS-0-7c4dff?style=for-the-badge&logo=github&logoColor=white" alt="Followers"/></a>
   <a href="https://github.com/OPX-Aminul?tab=repositories"><img src="https://img.shields.io/badge/STARS-5-00ffa3?style=for-the-badge&logo=github&logoColor=white" alt="Stars"/></a>
   <a href="https://github.com/OPX-Aminul?tab=repositories"><img src="https://img.shields.io/badge/PUBLIC%20REPOS-7-7c4dff?style=for-the-badge&logo=github&logoColor=white" alt="Public repos"/></a>
 </p>
@@ -33,7 +33,7 @@
 - **Android Developer** — tools that run in your pocket
 - **Self-taught** — curiosity and a terminal
 
-Live snapshot: **5** followers, **1** following, **7** public repos, **5** stars, **0** forks. Synced `2026-10-21 13:44 UTC`.
+Live snapshot: **0** followers, **0** following, **7** public repos, **5** stars, **0** forks. Synced `2026-10-21 13:45 UTC`.
 
 ---
 
@@ -113,7 +113,7 @@ These appear only while the fork still exists and is public.
 <p align="center">
   <a href="https://github.com/OPX-Aminul"><img src="https://img.shields.io/badge/OPX--Aminul-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
   <a href="https://github.com/OPX-Aminul?tab=repositories"><img src="https://img.shields.io/badge/All-Repositories-7c4dff?style=for-the-badge&logo=git&logoColor=white" alt="Repos"/></a>
-  <a href="https://github.com/OPX-Aminul?tab=followers"><img src="https://img.shields.io/badge/Followers-5-00e5ff?style=for-the-badge&logo=github" alt="Followers"/></a>
+  <a href="https://github.com/OPX-Aminul?tab=followers"><img src="https://img.shields.io/badge/Followers-0-00e5ff?style=for-the-badge&logo=github" alt="Followers"/></a>
 </p>
 
 <p align="center">
