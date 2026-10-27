@@ -1,18 +1,18 @@
 <!-- Generated live from GitHub API. Do not edit by hand. -->
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/banner.svg?v=1793119546" width="100%" alt="OPX-Aminul banner"/>
+  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/banner.svg?v=1793134910" width="100%" alt="OPX-Aminul banner"/>
 </p>
 
 <p align="center">
   <a href="https://github.com/OPX-Aminul"><img src="https://komarev.com/ghpvc/?username=OPX-Aminul&style=for-the-badge&color=00e5ff&label=PROFILE+VIEWS" alt="Profile views"/></a>
-  <a href="https://github.com/OPX-Aminul?tab=followers"><img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/followers.svg?v=1793119546" alt="Followers"/></a>
-  <a href="https://github.com/OPX-Aminul?tab=repositories"><img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/stars.svg?v=1793119546" alt="Stars"/></a>
+  <a href="https://github.com/OPX-Aminul?tab=followers"><img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/followers.svg?v=1793134910" alt="Followers"/></a>
+  <a href="https://github.com/OPX-Aminul?tab=repositories"><img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/stars.svg?v=1793134910" alt="Stars"/></a>
   <a href="https://opaminulff.vercel.app/"><img src="https://img.shields.io/badge/Website-opaminulff-00e5ff?style=for-the-badge" alt="Website"/></a>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/divider.svg?v=1793119546" width="100%" alt="divider"/>
+  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/divider.svg?v=1793134910" width="100%" alt="divider"/>
 </p>
 
 ---
@@ -20,11 +20,11 @@
 ## About
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/terminal.svg?v=1793119546" width="100%" alt="whoami terminal"/>
+  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/terminal.svg?v=1793134910" width="100%" alt="whoami terminal"/>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/ticker.svg?v=1793119546" width="100%" alt="skills ticker"/>
+  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/ticker.svg?v=1793134910" width="100%" alt="skills ticker"/>
 </p>
 
 I build mobile and wireless security tools — from Android pentest suites to WPS research frameworks.
@@ -34,7 +34,7 @@ I build mobile and wireless security tools — from Android pentest suites to WP
 - **Open source** — ship usable tools, not just writeups
 - **Location** — Bangladesh · currently building [OPX-Demon](https://github.com/OPX-Aminul/OPX-Demon)
 
-Live snapshot: **5** followers · **1** following · **5** stars · synced `2026-10-27 16:45 UTC`
+Live snapshot: **5** followers · **1** following · **5** stars · synced `2026-10-27 21:01 UTC`
 
 ---
 
@@ -89,5 +89,5 @@ Live snapshot: **5** followers · **1** following · **5** stars · synced `2026
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/footer.svg?v=1793119546" width="100%" alt="footer"/>
+  <img src="https://raw.githubusercontent.com/OPX-Aminul/OPX-Aminul/main/assets/footer.svg?v=1793134910" width="100%" alt="footer"/>
 </p>
