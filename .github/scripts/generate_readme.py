@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import json
 import os
+import re
 import subprocess
 import time
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -14,11 +16,25 @@ ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / "assets"
 
 FEATURED = [
-    "OPX-Demon",
     "OPXoneshot",
     "OPX-wifi4",
+    "OPX-Demon-ok",
     "nethunter-all-kernel",
 ]
+
+ACH_COLORS = {
+    "Quickdraw": "00e5ff",
+    "YOLO": "ff5470",
+    "Galaxy Brain": "7c4dff",
+    "Pull Shark": "00ffa3",
+    "Pair Extraordinaire": "f9a825",
+    "Starstruck": "ffb300",
+    "Arctic Code Vault Contributor": "8bc34a",
+    "Public Sponsor": "ea4aaa",
+}
+
+PULL_SHARK_TIERS = [(2, "base"), (16, "bronze"), (128, "silver"), (1024, "gold")]
+STARSTRUCK_TIERS = [(16, "base")]
 
 
 def github_api(path, authed=True):
@@ -35,13 +51,16 @@ def github_api(path, authed=True):
         with urllib.request.urlopen(req, timeout=30) as resp:
             return json.load(resp)
 
-    result = subprocess.run(
-        ["gh", "api", path],
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode == 0 and result.stdout.strip():
-        return json.loads(result.stdout)
+    try:
+        result = subprocess.run(
+            ["gh", "api", path],
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            return json.loads(result.stdout)
+    except (FileNotFoundError, OSError):
+        pass  # no gh CLI here: fall through to the plain public API
 
     req = urllib.request.Request(url, headers={
         "Accept": "application/vnd.github+json",
@@ -70,6 +89,11 @@ def md_escape(text):
     return (text or "").replace("|", "\\|").replace("\n", " ").strip()
 
 
+def shield_label(text):
+    """shields.io static badge escaping: _ is space, - is --, _ is __"""
+    return text.replace("_", "__").replace("-", "--").replace(" ", "_")
+
+
 def badge_svg(label, value, color):
     label = str(label).upper()
     value = str(value)
@@ -91,6 +115,41 @@ def badge_svg(label, value, color):
   </g>
 </svg>
 '''
+
+
+def unlocked_achievements():
+    """Read the badges GitHub already granted from the public achievements tab."""
+    try:
+        req = urllib.request.Request(
+            f"https://github.com/{USERNAME}?tab=achievements",
+            headers={"User-Agent": "Mozilla/5.0 (compatible; profile-readme)"},
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            html = resp.read().decode("utf-8", "ignore")
+    except Exception:
+        return []
+    names = []
+    for name in re.findall(r'alt="Achievement: ([^"]+)"', html):
+        if name not in names:
+            names.append(name)
+    return names
+
+
+def merged_pr_total():
+    try:
+        data = github_api(
+            f"/search/issues?q=is%3Apr+is%3Amerged+author%3A{USERNAME}", authed=False
+        )
+        return int(data.get("total_count") or 0)
+    except Exception:
+        return 0
+
+
+def next_tier(value, tiers):
+    for mark, name in tiers:
+        if value < mark:
+            return mark, name
+    return tiers[-1][0], tiers[-1][1]
 
 
 user = github_api(f"/users/{USERNAME}", authed=False)
@@ -118,6 +177,41 @@ if len(featured) < 4:
 ASSETS.mkdir(parents=True, exist_ok=True)
 (ASSETS / "followers.svg").write_text(badge_svg("FOLLOWERS", followers, "#7c4dff"), encoding="utf-8")
 (ASSETS / "stars.svg").write_text(badge_svg("STARS", stars, "#00ffa3"), encoding="utf-8")
+
+merged_prs = merged_pr_total()
+shark_mark, shark_tier = next_tier(merged_prs, PULL_SHARK_TIERS)
+star_mark, star_tier = next_tier(stars, STARSTRUCK_TIERS)
+
+unlocked = unlocked_achievements()
+badge_row = []
+for name in unlocked:
+    color = ACH_COLORS.get(name, "00e5ff")
+    badge_row.append(
+        f'  <a href="https://github.com/{USERNAME}?tab=achievements">'
+        f'<img src="https://img.shields.io/badge/{shield_label(name)}-unlocked-{color}'
+        f'?style=for-the-badge&logo=github&logoColor=white" alt="{name}"/></a>'
+    )
+
+progress_row = [
+    f'  <img src="https://img.shields.io/badge/{shield_label("Pull Shark")}-'
+    f'{merged_prs}_merged_PR-00ffa3?style=for-the-badge&logo=git&logoColor=white" '
+    f'alt="Pull Shark: {merged_prs} merged pull requests"/>',
+    f'  <img src="https://img.shields.io/badge/{shield_label("Starstruck")}-'
+    f'{stars}_of_{star_mark}_stars-ffb300?style=for-the-badge&logo=github&logoColor=white" '
+    f'alt="Starstruck: {stars} of {star_mark} stars"/>',
+]
+
+achievements_block = f"""## Achievements
+
+<p align="center">
+{chr(10).join(badge_row) if badge_row else '  <em>Badges are syncing — check back soon.</em>'}
+</p>
+
+<p align="center">
+{chr(10).join(progress_row)}
+</p>
+
+<p align="center"><sub>Read live from GitHub's achievements tab · next Pull Shark tier ({shark_tier}) at {shark_mark} merged PRs · next Starstruck tier ({star_tier}) at {star_mark} stars</sub></p>"""
 
 synced = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 cache = int(time.time())
@@ -214,6 +308,10 @@ Live snapshot: **{followers}** followers · **{following}** following · **{star
 
 ---
 
+{achievements_block}
+
+---
+
 ## Stack
 
 <p align="center">
@@ -263,5 +361,6 @@ Live snapshot: **{followers}** followers · **{following}** following · **{star
 
 (ROOT / "README.md").write_text(readme, encoding="utf-8")
 print(
-    f"Wrote README.md followers={followers} stars={stars} featured={[r['name'] for r in featured]}"
+    f"Wrote README.md followers={followers} stars={stars} merged_prs={merged_prs} "
+    f"achievements={unlocked} featured={[r['name'] for r in featured]}"
 )
